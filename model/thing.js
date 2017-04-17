@@ -29,7 +29,21 @@ console.log(allthings)
  * type = 2, trả về animal only
  */
 function getThing(type) {
-
+  let result = [];
+  if (type === 0) {
+    result = allthings;
+  } else if (type === 1) {
+    result = allthings.filter(thing => thing.type === 1);
+  } else if (type === 2) {
+    result = allthings.filter(thing => thing.type === 2);
+  } else {
+    result = 'You selected invalid type!'
+  }
+  return result;
 }
+console.log(getThing(0));
+console.log(getThing(1));
+console.log(getThing(2));
+console.log(getThing());
 
 exports.getThing = getThing
