@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../public/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <select id="sel" onchange="show()">
+        <option value="0" >- Select -</option>
+        <option value="1" id="all">All</option>
+        <option value="2" id="animal">Animal</option>
+        <option value="3" id="thing">Thing</option>
+    </select>
+    <div id="showImg"></div>
+    <script>
+        function show(){
+
+            let getValue = $('#sel').val();
+
+            $.ajax({
+                url : "",
+                type : 'POST',
+                dataType:'application/json',
+                data: getValue
+            });
+            console.log({data : getValue});
+        }
+
+    </script>
+</body>
+</html>
+<!-- TODO: Nhóm Tùng
+1. Vẽ listbox có 3 lựa chọn, có option value
+2. Hứng sự kiện select để jQuery post
+-->
