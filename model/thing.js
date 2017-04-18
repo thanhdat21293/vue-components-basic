@@ -20,7 +20,7 @@ allthings.push(new Thing('Seahorse', 'seahorse.png', 2))
 allthings.push(new Thing('Turtle', 'turtle.png', 2))
 allthings.push(new Thing('TV', 'Tv.png', 1))
 
-console.log(allthings)
+//console.log(allthings)
 //TODO: hãy hoàn một function sau đây. Giao cho đội Vue.js
 /**
  *
@@ -28,22 +28,22 @@ console.log(allthings)
  * type = 1, trả về thing, không phải animal
  * type = 2, trả về animal only
  */
-function getThing(type) {
+function getThing(type, things) {
   let result = [];
   if (type === 0) {
-    result = allthings;
+    result = things;
   } else if (type === 1) {
-    result = allthings.filter(thing => thing.type === 1);
+    result = things.filter(thing => thing.type === 1);
   } else if (type === 2) {
-    result = allthings.filter(thing => thing.type === 2);
+    result = things.filter(thing => thing.type === 2);
   } else {
     result = 'You selected invalid type!'
   }
   return result;
 }
-console.log(getThing(0));
-console.log(getThing(1));
-console.log(getThing(2));
-console.log(getThing());
-
+// console.log(getThing(0));
+// console.log(getThing(1));
+// console.log(getThing(2));
+// console.log(getThing());
+exports.allthings = allthings
 exports.getThing = getThing
