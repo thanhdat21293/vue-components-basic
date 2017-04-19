@@ -17,10 +17,9 @@ app.set('vue', {
 const allThings = require('./model/thing.js').allthings;
 
 const selectItems = [
-    { name: '-Select Option-', type: 0 },
+    { name: 'all', type: 0 },
     { name: 'thing', type: 1 },
-    { name: 'animal', type: 2 },
-    { name: 'all', type: 3 }
+    { name: 'animal', type: 2 }
 ];
 
 var exampleMixin = {

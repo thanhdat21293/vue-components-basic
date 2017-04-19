@@ -6,28 +6,42 @@
     <script src="../public/js/jquery-3.2.1.min.js"></script>
 </head>
 <body>
+
+<!--<form action="/jquery" method="post">-->
+<!--<input type="text" name="name">Name: <br>-->
+<!--<button>Send</button>-->
+<!--</form>-->
+
+<form id="form" action="/jquery" method="post">
     <select id="sel" onchange="show()">
-        <option value="0" >- Select -</option>
-        <option value="1" id="all">All</option>
+        <option value="0" id="select">- Select -</option>
+        <option value="1" id="thing">Thing</option>
         <option value="2" id="animal">Animal</option>
-        <option value="3" id="thing">Thing</option>
+        <option value="3" id="all">All</option>
     </select>
-    <div id="showImg"></div>
-    <script>
-        function show(){
+</form>
+<div id="showImg">
+    <span id="img"></span>
+</div>
+<script>
+    function show() {
+        let getValue = parseInt($('#sel').val());
+        $.ajax({
+            url: "/jquery",
+            type: 'POST',
+            dataType: 'json',
+            data: {data: getValue}, // req.body phai lay data la object
+            success: function (data) {
+                console.log(data);
+                $('#img').empty();
+                for (let photo = 0; photo < data.length; photo++) {
+                    $('#img').append('<img src="../public/image/' + data[photo] + '"  style="width: 200px;"/>');
+                }
 
-            let getValue = $('#sel').val();
-
-            $.ajax({
-                url : "",
-                type : 'POST',
-                dataType:'application/json',
-                data: getValue
-            });
-            console.log({data : getValue});
-        }
-
-    </script>
+            }
+        });
+    }
+</script>
 </body>
 </html>
 <!-- TODO: Nhóm Tùng
