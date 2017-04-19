@@ -7,12 +7,8 @@
 </head>
 <body>
 
-<!--<form action="/jquery" method="post">-->
-<!--<input type="text" name="name">Name: <br>-->
-<!--<button>Send</button>-->
-<!--</form>-->
 
-<form id="form" action="/jquery" method="post">
+<form id="form" action="/" method="post">
     <select id="sel" onchange="show()">
         <option value="0" id="select">- Select -</option>
         <option value="1" id="thing">Thing</option>
@@ -24,27 +20,31 @@
     <span id="img"></span>
 </div>
 <script>
-    function show() {
-        let getValue = parseInt($('#sel').val());
-        $.ajax({
-            url: "/jquery",
-            type: 'POST',
-            dataType: 'json',
-            data: {data: getValue}, // req.body phai lay data la object
-            success: function (data) {
-                console.log(data);
-                $('#img').empty();
-                for (let photo = 0; photo < data.length; photo++) {
-                    $('#img').append('<img src="../public/image/' + data[photo] + '"  style="width: 200px;"/>');
-                }
+	function show() {
+		let getValue = parseInt($('#sel').val());
+      /* $.ajax({
+       url: "/",
+       type: 'POST',
+       dataType: 'json',
+       data: {data: getValue}, // req.body phai lay data la object
+       success: function (data) {
+       console.log(data);
+       $('#img').empty();
+       for (let photo = 0; photo < data.length; photo++) {
+       $('#img').append('<img src="../public/image/' + data[photo] + '"  style="width: 200px;"/>');
+       }
 
-            }
-        });
-    }
+       }
+       }); */
+
+      //Code ngắn hơn !
+		$.post("/", {data: getValue}, function (result) {
+			$('#img').empty();
+			for (let photo = 0; photo < result.length; photo++) {
+				$('#img').append('<img src="/public/image/' + result[photo] + '"  style="width: 200px;"/>');
+			}
+		})
+	}
 </script>
 </body>
 </html>
-<!-- TODO: Nhóm Tùng
-1. Vẽ listbox có 3 lựa chọn, có option value
-2. Hứng sự kiện select để jQuery post
--->

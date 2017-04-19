@@ -13,20 +13,16 @@ app.use(bodyParser.urlencoded({
 app.use('/public', express.static('public'))
 app.set('view engine', 'html')
 
-app.get('/jquery',function(req,res){
+app.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/views/jQuery_client.html'));
-    //res.render('jQuery_client')
 });
 
 
-app.post('/jquery',function(req,res){
+app.post('/',function(req,res){
     let photo =[];
     let type = req.body.data;
     let data = getThing(type,allthings);
-    // data.forEach(function (value,index) {
-    //     let image = data[index].photo;
-    //     photo.push(image);
-    // });
+
     for (var index = 0; index < data.length; index++) {
       let image = data[index].photo;
       photo.push(image);
