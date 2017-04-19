@@ -6,7 +6,7 @@ class Thing {
   constructor(name, photo, type) {
     this.name = name
     this.photo = photo
-    this.type = type
+	  this.type = type
   }
 }
 //TODO: Tung hãy điền hết các thing và animal vào đây
@@ -20,31 +20,34 @@ allthings.push(new Thing('Seahorse', 'seahorse.png', 2))
 allthings.push(new Thing('Turtle', 'turtle.png', 2))
 allthings.push(new Thing('TV', 'Tv.png', 1))
 
-//console.log(allthings)
-//TODO: hãy hoàn một function sau đây. Giao cho đội Vue.js
-/**
- *
- * @param type = 0 lấy tất cả
- * type = 1, trả về thing, không phải animal
- * type = 2, trả về animal only
- */
-function getThing(type, things) {
-  let result = [];
-  let selectedOpt = parseInt(type);
-  if (selectedOpt === 0) {
-    result = [];
-  } else if (selectedOpt === 1) {
-    result = things.filter(thing => thing.type === 1);
-  } else if (selectedOpt === 2) {
-    result = things.filter(thing => thing.type === 2);
-  } else if (selectedOpt === 3) {
-    result = things; 
-  } else {
-    result = 'You selected invalid type!'
-  }
-  return result;
-}
-//console.log(getThing(2, allthings));
 
-exports.allthings = allthings
-exports.getThing = getThing
+function getThing(type, things) {
+    let result = [];
+    let selectedOpt = parseInt(type);
+
+    switch (selectedOpt) {
+      case 0 :
+      result = [];
+      break;
+      case 1 :
+      result = things.filter(thing => thing.type === 1);
+      break;
+      case 2 :
+      result = things.filter(thing => thing.type === 2);
+      break;
+      case 3 :
+      result = things;
+      break;
+      default:
+      result = 'You selected invalid type!';
+      break;
+    }
+
+      return result;
+
+}
+
+
+
+exports.allthings = allthings;
+exports.getThing = getThing;

@@ -17,26 +17,22 @@ app.set('vue', {
 const allThings = require('./model/thing.js').allthings;
 
 const selectItems = [
-    { name: '-Select Option-', type: 0 },
+    { name: 'all', type: 0 },
     { name: 'thing', type: 1 },
-    { name: 'animal', type: 2 },
-    { name: 'all', type: 3 }
+    { name: 'animal', type: 2 }
 ];
 
 var exampleMixin = {
     methods: {
         showImg: function (type) {
             //console.log(this.images);
-            let selectedOpt = parseInt(type);
             let result = [];
-            if (selectedOpt === 0) {
-                result = [];
-            } else if (selectedOpt === 1) {
+            if (parseInt(type) === 0) {
+                result = this.images;
+            } else if (parseInt(type) === 1) {
                 result = this.images.filter(thing => thing.type === 1);
-            } else if (selectedOpt === 2) {
+            } else if (parseInt(type) === 2) {
                 result = this.images.filter(thing => thing.type === 2);
-            } else if (selectedOpt === 3) {
-                result = this.images; 
             } else {
                 result = 'You selected invalid type!'
             }
