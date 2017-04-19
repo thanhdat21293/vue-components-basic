@@ -21,7 +21,8 @@ const selectItems = [
     { name: 'thing', type: 1 },
     { name: 'animal', type: 2 }
 ];
-
+//TODO: Ứng dụng chưa chạy, cô Linh kiểm thử lại nhé
+//Cái này chuyển lên server sẽ tốt hơn
 var exampleMixin = {
     methods: {
         showImg: function (type) {
