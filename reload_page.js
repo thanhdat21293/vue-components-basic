@@ -35,11 +35,6 @@ app.set('view engine', 'html');
 
 
  app.get('/', function(req,res){
- let pic = ["bird.png","bus.png", "car.png" , "cat.png", "seahorse.png", "turtle.png", "tv.png"];
-     let data = {
-         pic : pic
-     }
-
      res.render('reload_page.html');
 
  });
