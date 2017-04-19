@@ -26,19 +26,24 @@ const selectItems = [
 var exampleMixin = {
     methods: {
         showImg: function (type) {
-            //console.log(this.images);
-            let selectedOpt = parseInt(type);
             let result = [];
-            if (selectedOpt === 0) {
-                result = [];
-            } else if (selectedOpt === 1) {
-                result = this.images.filter(thing => thing.type === 1);
-            } else if (selectedOpt === 2) {
-                result = this.images.filter(thing => thing.type === 2);
-            } else if (selectedOpt === 3) {
-                result = this.images; 
-            } else {
-                result = 'You selected invalid type!'
+            let selectedOpt = parseInt(type);
+            switch (selectedOpt) {
+                case 0:
+                    result = [];
+                    break;
+                case 1:
+                    result = things.filter(thing => thing.type === 1);
+                    break;
+                case 2:
+                    result = things.filter(thing => thing.type === 2);
+                    break;
+                case 3:
+                    result = things;
+                    break;
+                default:
+                    result = 'You selected invalid type!';
+                    break;
             }
             return result;
         }
@@ -54,13 +59,6 @@ app.get('/', (req, res) => {
             images: allThings
         },
         vue: {
-            head: {
-                title: 'Express Vue',
-                meta: [
-                    { property: 'og:title', content: 'Express Vue' },
-                    { name: 'twitter:title', content: 'Express Vue' }
-                ]
-            },
             mixins: [exampleMixin]
         }
     }

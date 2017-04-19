@@ -31,17 +31,25 @@ allthings.push(new Thing('TV', 'Tv.png', 1))
 function getThing(type, things) {
   let result = [];
   let selectedOpt = parseInt(type);
-  if (selectedOpt === 0) {
-    result = [];
-  } else if (selectedOpt === 1) {
-    result = things.filter(thing => thing.type === 1);
-  } else if (selectedOpt === 2) {
-    result = things.filter(thing => thing.type === 2);
-  } else if (selectedOpt === 3) {
-    result = things; 
-  } else {
-    result = 'You selected invalid type!'
+
+  switch (selectedOpt) {
+    case 0:
+      result = [];
+      break;
+    case 1:
+      result = things.filter(thing => thing.type === 1);
+      break;
+    case 2:
+      result = things.filter(thing => thing.type === 2);
+      break;
+    case 3:
+      result = things;
+      break;
+    default:
+      result = 'You selected invalid type!';
+      break;
   }
+
   return result;
 }
 //console.log(getThing(2, allthings));
