@@ -6,10 +6,13 @@
   "author": "Techmaster team",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.16.1",
     "body-parser": "^1.17.1",
     "browserify": "^14.3.0",
     "express": "^4.15.2",
     "express-vue": "^3.9.11",
-    "nunjucks": "^3.0.0"
+    "nunjucks": "^3.0.0",
+    "vue": "^2.2.6",
+    "vue-axios": "^2.0.1"
   }
 }

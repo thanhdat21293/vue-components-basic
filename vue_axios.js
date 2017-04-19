@@ -1,68 +1,28 @@
-//TODO: Hãy viết khung một ứng dụng Express vào đây. hãy tham khảo https://github.com/TechMaster/learn_express
+/*
+ * Created by Linh Ngo in 17/04/2017
+ */
+var path = require('path')
+var express = require('express')
+var expressVue = require('express-vue')
+var app = express();
 
-const express = require('express');
-const app = express();
-const nunjucks = require('nunjucks');
-const path = require("path");
-const recursive = require('recursive-readdir');
-
-
-//--------Body Parser ----------------------
-const bodyParser = require("body-parser");
+app.use('/public', express.static('public'))
 
 
-
-// for easier testing with Postman or plain HTML forms
-app.use(bodyParser.urlencoded({
-    extended: true  //value of parameter can be any type https://expressjs.com/en/resources/middleware/body-parser.html
-}));
-
-
-//--------Serve static resource -------------
-app.use('/public', express.static('public'));
-
-//---------View Template Engine -------------
-;
-nunjucks.configure('views', {
-    autoescape: true,
-    cache: false,
-    express: app,
-    watch: true
+app.engine('vue', expressVue);
+app.set('view engine', 'vue');
+app.set('views', path.join(__dirname, '/views'));
+app.set('vue', {
+	defaultLayout: 'layout'
 });
 
-app.engine('html', nunjucks.render);
-app.set('view engine', 'html');
+const allThings = require('./model/thing.js').allthings;
 
 
- app.get('/', function(req,res){
-     res.render('reload_page.html');
+app.get('/', (req, res) => {
+	res.render('index_axios');
+})
 
- });
-
-
- app.post('/getpicture', function(req,res) {
-     let select= req.body.select;
-     let pathPic= '';
-         if (select === "1"){
-             pathPic = path.join("public", "image");
-         }
-         if (select === "2"){
-             pathPic = path.join("public", "image", "animal");
-         }
-         if (select === "3"){
-             pathPic = path.join("public", "image", "things");
-         }
-     recursive (pathPic, (err, pictures) => {
-         let data = {
-             "pictures" : pictures
-         };
-     res.render ("reload_page.html", data);
- });
- });
-
-
-// ------------app.listen----------------
-const port = 3000;
-app.listen(port, () => {
-    console.log(' http://localhost:' + port);
+app.listen(3000, () => {
+	console.log('Express server listening on port 3000');
 });
