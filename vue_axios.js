@@ -1,10 +1,7 @@
-/*
- * Created by Linh Ngo in 17/04/2017
- */
-var path = require('path')
-var express = require('express')
-var expressVue = require('express-vue')
-var app = express();
+const path = require('path')
+const express = require('express')
+const expressVue = require('express-vue')
+const app = express()
 
 app.use('/public', express.static('public'))
 
@@ -16,12 +13,34 @@ app.set('vue', {
 	defaultLayout: 'layout'
 });
 
-const allThings = require('./model/thing.js').allthings;
+//--------Body Parser ----------------------
+const bodyParser = require("body-parser")
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+	extended: true
+}))
+
+// parse application/json
+app.use(bodyParser.json())
+
+const selectItems = [
+    { name: '-', type: 0 },
+    { name: 'thing', type: 1 },
+    { name: 'animal', type: 2 },
+    { name: 'all', type: 3}
+];
+
+let things = require('./model/things')
 
 app.get('/', (req, res) => {
-	res.render('index_axios');
+	res.render('index_axios', {data: {selectItems: selectItems}});
 })
+
+app.post('/querydata', (req, res) => {
+	res.json(things.getThing(req.body.selectedType))
+})
+
 
 app.listen(3000, () => {
 	console.log('Express server listening on port 3000');

@@ -1,40 +1,36 @@
-<!-- http://codepen.io/setholito/pen/PbxqRj -->
 <template>
     <div id="app">
-        <form @submit.prevent="search">
-            <input v-model="username" placeholder="Enter a github username !"/>
-        </form>
-        <p v-if="data.name && data.location">
-            {{ data.name }} {{ data.login }}
-            is from
-            {{ data.location }}
-        </p>
-
-        <p v-else>{{ errorMsg }}</p>
+        <select v-model="selected" name="selectOpt" v-on:change="getList()">
+            <option v-for="item in selectItems" :value="item.type">{{ item.name }}</option>
+        </select>
+        <div>
+            <p>Selected: {{selected}}</p>
+            <img v-for="item in things" :src="'/public/image/' + item.photo" :alt="item.name" width="128" height="128">
+        </div>
     </div>
 </template>
 <script>
 	export default {
 		data() {
 			return {
-				username: '',
-				data: [],  //Nhan response tu REST service
+				selected: 0,
+				things: [],
 				errorMsg: ''
 			}
 		},
 
 		methods: {
-			search() {
-				const api = `https://api.github.com/users/${this.username}`
-				axios.get(api).then(response => {
-					this.data = response.data
+			getList() {
+				axios.post('/querydata', {
+					selectedType: this.selected
+				}).then(response => {
+					console.log(response)
+					this.things = response.data
 				}).catch(error => {
 					this.errorMsg = 'No user or no location'
-					this.data = []
+					this.things = []
 				})
 			}
 		}
 	}
 </script>
-<style lang="css">
-</style>
