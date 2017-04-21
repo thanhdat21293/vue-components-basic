@@ -10,6 +10,7 @@ app.engine('vue', expressVue);
 app.set('view engine', 'vue');
 app.set('views', path.join(__dirname, '/views'));
 app.set('vue', {
+	componentsDir: path.join(__dirname, '/views/components'),
 	defaultLayout: 'layout'
 });
 
@@ -34,7 +35,14 @@ const selectItems = [
 let things = require('./model/things')
 
 app.get('/', (req, res) => {
-	res.render('index_axios', {data: {selectItems: selectItems}});
+	res.render('index_axios', {
+		data: {
+			selectItems: selectItems
+		},
+		vue: {
+            components: ['images']
+        }
+	});
 })
 
 app.post('/querydata', (req, res) => {

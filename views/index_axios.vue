@@ -1,11 +1,13 @@
 <template>
     <div id="app">
-        <select v-model="selected" name="selectOpt" v-on:change="getList()">
-            <option v-for="item in selectItems" :value="item.type">{{ item.name }}</option>
-        </select>
-        <div>
+        <div class="abc123">
+            <select v-model="selected" name="selectOpt" v-on:change="getList()">
+                <option v-for="item in selectItems" :value="item.type">{{ item.name }}</option>
+            </select>
             <p>Selected: {{selected}}</p>
-            <img v-for="item in things" :src="'/public/image/' + item.photo" :alt="item.name" width="128" height="128">
+        </div>
+        <div class="gridview">
+            <images :things="things"></images>
         </div>
     </div>
 </template>
@@ -34,3 +36,4 @@
 		}
 	}
 </script>
+
