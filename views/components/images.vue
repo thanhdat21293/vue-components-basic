@@ -14,8 +14,3 @@ export default {
     props: ['things']
 }
 </script>
-<style>
-img{
-        display:none;
-    }
-</style>
